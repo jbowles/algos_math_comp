@@ -1,0 +1,6 @@
+[package]
+name = "multiples_3_5"
+version = "0.1.0"
+authors = ["Joshua Bowles <jbowayles@gmail.com>"]
+
+[dependencies]
