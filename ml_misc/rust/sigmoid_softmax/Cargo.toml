@@ -1,0 +1,7 @@
+[package]
+name = "sigmoid_softmax"
+version = "0.1.0"
+authors = ["Joshua Bowles <jbowayles@gmail.com>"]
+
+[dependencies]
+nalgebra = "0.16"

@@ -7,14 +7,19 @@ import (
 	"gonum.org/v1/gonum/mat"
 )
 
-func sigmoid(x float64) float64 {
-	return 1.0 / (1.0 + math.Exp(-x))
-}
-
 func runSigmoid() {
 	res := sigmoid(7.0)
 	expect := 0.9990889488055994
 	fmt.Printf("Sigmoid %t. expect '%g', got '%g'\n", res == expect, expect, res)
+}
+
+/*
+	in numpy
+	1.0 / (1.0 + math.exp(-x))
+
+*/
+func sigmoid(x float64) float64 {
+	return 1.0 / (1.0 + math.Exp(-x))
 }
 
 /*
@@ -71,7 +76,7 @@ func run_softmax() {
 }
 
 func main() {
-	//runSigmoid()
+	runSigmoid()
 	run_softmax()
 }
 
