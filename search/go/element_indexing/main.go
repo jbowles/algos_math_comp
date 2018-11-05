@@ -10,7 +10,7 @@ func abs(x int) int {
 }
 
 //Find duplicates in O(n) time and O(1) extra space | Set 1
-//https://www.geeksforgeeks.org/find-duplicates-in-on-time-and-constant-extra-space/
+// go vervsion of this c implementation found here: https://www.geeksforgeeks.org/find-duplicates-in-on-time-and-constant-extra-space/
 
 // size of array cannot be smaller or equal to largest integer in array
 func findRepeating(arr []int) {

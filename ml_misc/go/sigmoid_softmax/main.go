@@ -22,11 +22,7 @@ func sigmoid(x float64) float64 {
 	return 1.0 / (1.0 + math.Exp(-x))
 }
 
-/*
-	in numpy
-	np.exp(x) / np.sum(np.exp(x), axis=0)
-*/
-func softmax(x *mat.Dense) *mat.Dense {
+func softmax(x *mat.Dense) {
 	m := mat.DenseCopyOf(x)
 	m.Apply(func(i, j int, v float64) float64 { return math.Exp(v) }, m)
 
@@ -48,11 +44,9 @@ func softmax(x *mat.Dense) *mat.Dense {
 			m.Set(row, clm, set/v)
 		}
 	}
-
-	return m
 }
 
-func run_softmax() {
+func runSoftmax() {
 	// Initialize a matrix a with some data.
 	a := mat.NewDense(4, 4, []float64{
 		1, 2, 3, 6,
@@ -67,9 +61,9 @@ func run_softmax() {
 		0.3994863046503028, 0.4948548968768571, 0.4643278024895243, 0.25,
 	})
 
-	res := softmax(a)
+	softmax(a)
 
-	fm := mat.Formatted(res, mat.Prefix("    "), mat.Squeeze())
+	fm := mat.Formatted(a, mat.Prefix("    "), mat.Squeeze())
 	fmt.Printf("r = %.3f\n\n", fm)
 	fc := mat.Formatted(compare, mat.Prefix("    "), mat.Squeeze())
 	fmt.Printf("c = %.3f\n", fc)
@@ -77,7 +71,7 @@ func run_softmax() {
 
 func main() {
 	runSigmoid()
-	run_softmax()
+	runSoftmax()
 }
 
 /*
