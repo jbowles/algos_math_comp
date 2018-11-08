@@ -3,10 +3,107 @@ use na::{
     DMatrix, Dynamic, Matrix, Matrix2x3, Matrix3x4, Matrix4, MatrixArray, MatrixVec, RowVector4,
     Vector2, Vector4, U2, U3, U4,
 };
+use std::ops::DivAssign;
+
+//./target/debug/sigmoid_softmax
+fn main() {
+    //println!("sigmoid: {}", sigmoid(10.0));
+    //playplay();
+
+    let mut m4 = Matrix4::from_rows(&[
+        RowVector4::new(1.0, 2.0, 3.0, 6.0),
+        RowVector4::new(2.0, 4.0, 5.0, 6.0),
+        RowVector4::new(3.0, 8.0, 7.0, 6.0),
+        RowVector4::new(3.0, 8.0, 7.0, 6.0),
+    ]);
+    println!("m4 = {}", m4);
+    softmax_naive1(&mut m4);
+    println!("m4 = {}", m4);
+
+    let mut m41 = Matrix4::from_rows(&[
+        RowVector4::new(1.0, 2.0, 3.0, 6.0),
+        RowVector4::new(2.0, 4.0, 5.0, 6.0),
+        RowVector4::new(3.0, 8.0, 7.0, 6.0),
+        RowVector4::new(3.0, 8.0, 7.0, 6.0),
+    ]);
+
+    softmax_naive_by_row(&mut m41);
+    println!("m41 = {}", m41);
+
+    let mut m42 = Matrix4::from_rows(&[
+        RowVector4::new(1.0, 2.0, 3.0, 6.0),
+        RowVector4::new(2.0, 4.0, 5.0, 6.0),
+        RowVector4::new(3.0, 8.0, 7.0, 6.0),
+        RowVector4::new(3.0, 8.0, 7.0, 6.0),
+    ]);
+
+    softmax_naive_by_column(&mut m42);
+    println!("m42 = {}", m42);
+}
 
 #[allow(dead_code)]
 fn sigmoid(x: f32) -> f32 {
     1.0 / (1.0 + (-x).exp())
+}
+
+//type AbstractMatrix = Matrix<f32, Dynamic, Dynamic, MatrixVec<f64, Dynamic, Dynamic>>;
+//fn softmax(m: &mut Matrix4<f64>) -> Matrix4<f64> {
+fn softmax_naive1(m: &mut Matrix4<f64>) {
+    m.apply(|v| v.exp());
+
+    let mut v4 = Vector4::zeros();
+    let (r, c) = m.shape();
+    for idx in 0..c {
+        let cm = m.column_mut(idx);
+        let sum = cm.iter().fold(0.0, |sum, val| sum + val);
+        v4[idx] = sum;
+    }
+
+    for rw in 0..r {
+        let mut rv = RowVector4::zeros();
+        for (col, val) in v4.iter().enumerate() {
+            let ij = m.row(rw).column(col)[0];
+            rv[col] = ij / val;
+        }
+        m.set_row(rw, &rv);
+    }
+}
+fn softmax_naive_by_row(m: &mut Matrix4<f64>) {
+    m.apply(|v| v.exp());
+
+    let v4 = RowVector4::<f64>::from_fn(|_, j| m.column(j).iter().sum());
+    for rw in 0..m.nrows() {
+        m.row_mut(rw).component_div_assign(&v4)
+    }
+    /*
+    let mut v4 = Vector4::zeros();
+    let (r, c) = m.shape();
+    for idx in 0..c {
+        let cm = m.column_mut(idx);
+        let sum: f64 = cm.iter().sum();
+        v4[idx] = sum;
+    }
+
+    for rw in 0..r {
+        for (col, val) in v4.iter().enumerate() {
+            m[(rw, col)] /= val
+        }
+    }
+    */
+}
+
+fn softmax_naive_by_column(m: &mut Matrix4<f64>) {
+    m.apply(|v| v.exp());
+    let v4 = Vector4::<f64>::from_fn(|i, _| m.column(i).iter().sum());
+    for j in 0..m.ncols() {
+        m.column_mut(j).div_assign(v4[j])
+    }
+    /*
+    for j in 0..m.ncols() {
+        let mut c = m.column_mut(j);
+        c /= v4[j];
+    }
+    */
 }
 
 /*
@@ -91,42 +188,3 @@ fn playplay() {
     in numpy
     np.exp(x) / np.sum(np.exp(x), axis=0)
 */
-
-//type AbstractMatrix = Matrix<f32, Dynamic, Dynamic, MatrixVec<f64, Dynamic, Dynamic>>;
-//fn softmax(m: &mut Matrix4<f64>) -> Matrix4<f64> {
-fn softmax(m: &mut Matrix4<f64>) {
-    m.apply(|v| v.exp());
-
-    let mut v4 = Vector4::zeros();
-    let (r, c) = m.shape();
-    for idx in 0..c {
-        let cm = m.column_mut(idx);
-        let sum = cm.iter().fold(0.0, |sum, val| sum + val);
-        v4[idx] = sum;
-    }
-
-    for rw in 0..r {
-        let mut rv = RowVector4::zeros();
-        for (col, val) in v4.iter().enumerate() {
-            let ij = m.row(rw).column(col)[0];
-            rv[col] = ij / val;
-        }
-        m.set_row(rw, &rv);
-    }
-}
-
-//./target/debug/sigmoid_softmax
-fn main() {
-    //println!("sigmoid: {}", sigmoid(10.0));
-    //playplay();
-
-    let mut m4 = Matrix4::from_rows(&[
-        RowVector4::new(1.0, 2.0, 3.0, 6.0),
-        RowVector4::new(2.0, 4.0, 5.0, 6.0),
-        RowVector4::new(3.0, 8.0, 7.0, 6.0),
-        RowVector4::new(3.0, 8.0, 7.0, 6.0),
-    ]);
-    println!("m4 = {}", m4);
-    softmax(&mut m4);
-    println!("m4 = {}", m4);
-}
