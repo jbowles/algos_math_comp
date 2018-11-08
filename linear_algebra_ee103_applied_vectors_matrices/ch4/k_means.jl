@@ -89,32 +89,40 @@ end
 
 k = 3
 X = vcat([0.3*randn(2) for i = 1:100], [[1,1] + 0.3*randn(2) for i = 1:100], [[1,-1] + 0.3*randn(2) for i = 1:100])
-#scatter([x[1] for x in X], [x[2] for x in X])
-#plot!(legend = false, grid = false, size = (500,500),xlims = (-1.5,2.5), ylims = (-2,2))
+
 
 ment, rep = mykmeans(X, k)
-#grps  = [[X[i] for i=1:length(X) if ment[i] == j] for j=1:k]
-#scatter([c[1] for c in grps[1]], [c[2] for c in grps[1]])
-#scatter!([c[1] for c in grps[2]], [c[2] for c in grps[2]])
-#scatter!([c[1] for c in grps[3]], [c[2] for c in grps[3]])
-#plot!(legend = false, grid = false, size = (500,500),xlims = (-1.5,2.5), ylims = (-2,2))
 
-#function mykmeans_debug(x, k; maxiters = 100, tol = 1e-5)
-#    N = length(x)
-#    println("k = ", k, ", N = ", N)
-#    println("")
-#    assignment = [rand(1:k) for i in 1:N]
-#    println("assignment = ", assignment)
-#    println("")
-#    println("")
-#    for iter = 1:maxiters
-#        for j = 1:k
-#            for i in 1:N
-#                println("at i = ", i, ", j = ", j, ", assignment[i] = ", assignment[i])
-#                if assignment[i] == j
-#                    println("push i: ", i)
-#                end
-#            end
-#        end
-#    end
-#end
+
+#==
+using Plots
+scatter([x[1] for x in X], [x[2] for x in X])
+plot!(legend = false, grid = false, size = (500,500),xlims = (-1.5,2.5), ylims = (-2,2))
+grps  = [[X[i] for i=1:length(X) if ment[i] == j] for j=1:k]
+scatter([c[1] for c in grps[1]], [c[2] for c in grps[1]])
+scatter!([c[1] for c in grps[2]], [c[2] for c in grps[2]])
+scatter!([c[1] for c in grps[3]], [c[2] for c in grps[3]])
+plot!(legend = false, grid = false, size = (500,500),xlims = (-1.5,2.5), ylims = (-2,2))
+==#
+
+#==
+function mykmeans_debug(x, k; maxiters = 100, tol = 1e-5)
+    N = length(x)
+    println("k = ", k, ", N = ", N)
+    println("")
+    assignment = [rand(1:k) for i in 1:N]
+    println("assignment = ", assignment)
+    println("")
+    println("")
+    for iter = 1:maxiters
+        for j = 1:k
+            for i in 1:N
+                println("at i = ", i, ", j = ", j, ", assignment[i] = ", assignment[i])
+                if assignment[i] == j
+                    println("push i: ", i)
+                end
+            end
+        end
+    end
+end
+==#
