@@ -1,7 +1,7 @@
 #abstract exponentiation function, subtract max for numerical stability
 _exp(x::AbstractVecOrMat) = exp.(x .- maximum(x))
 #abstract exponentiation function, subtract max for numerical stability and scale by theta
-_exp(x::AbstractVecOrMat, θ::AbstractFloat) =   exp.((x .- maximum(x)) * θ)
+_exp(x::AbstractVecOrMat, θ::AbstractFloat) = exp.((x .- maximum(x)) * θ)
 #softmax algorithm expects stablized eponentiated e
 _sftmax(e::AbstractVecOrMat, d::Integer) = (e ./ sum(e, dims = d))
 

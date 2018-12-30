@@ -57,7 +57,7 @@ X = np.array([
 
 # softmax over rows
 softmax(X, theta=0.5, axis=0)
-#array([[0.05523253, 0.40686118, 0.01458578, 0.41336824],
+# array([[0.05523253, 0.40686118, 0.01458578, 0.41336824],
 #       [0.82184522, 0.16541741, 0.39545889, 0.15206968],
 #       [0.12292225, 0.4277214 , 0.58995534, 0.43456208]])
 
@@ -77,9 +77,7 @@ softmax(X, theta=50.0, axis=1)
 #        1.68891188e-048]])
 
 
-
-
-def softmax_naive(x):
+def f(x):
     """ naive version of softmax, not theta scale... no numerical stability"""
     return np.exp(x) / np.sum(np.exp(x), axis=0)
 
