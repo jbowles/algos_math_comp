@@ -14,8 +14,6 @@ function softmax(X::AbstractVecOrMat{T}, dim::Integer, θ::Float64)::AbstractVec
     _sftmax(_exp(X, θ), dim)
 end
 
-
-
 scores4 = [1.1, 5.0, 2.8, 7.3] # won't work: 4-element Array{Float64,1}
 scores1x4 = [1.1 5.0 2.8 7.3] # 1×4 Array{Float64,2} ... need to transpose
 scores4x4 = [
