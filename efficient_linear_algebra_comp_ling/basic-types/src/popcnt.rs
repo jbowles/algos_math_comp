@@ -1,12 +1,22 @@
-pub fn popcnt(val: u64) -> u32 {
+pub fn popcnt1(val: u64) -> u32 {
     //val.count_ones() //built-in!
+    let mut c = 0;
+    let mut n = val;
+    while n > 0 {
+        c += n & 1;
+        n >>= 1;
+    }
+    c as u32
+}
+
+#[inline(always)]
+pub fn popcnt(mut x: u64) -> u32 {
     const M1_64: u64 = 0x5555555555555555; //binary: 0101...
     const M2_64: u64 = 0x3333333333333333; //binary: 00110011..
     const M4_64: u64 = 0x0f0f0f0f0f0f0f0f; //binary:  4 zeros,  4 ones ...
     const H01_64: u64 = 0x0101010101010101; //the sum of 256 to the power of 0,1,2,3...
-    let mut x = val;
-    x -= (x >> 1) & M1_64;
-    x = (x & M2_64) + ((x >> 2) & M2_64);
+    x -= (x >> 1) & M1_64; //count of each two bits into those 2 bits
+    x = (x & M2_64) + ((x >> 2) & M2_64); //put count of each 4 bits
     (((x + (x >> 4)) & M4_64).wrapping_mul(H01_64) >> 24) as u32
 }
 
@@ -57,6 +67,7 @@ mod tests {
     fn popcnt_test() {
         fn prop(v: u64) -> bool {
             if popcnt(v) != v.count_ones() {
+                println!("popcnt: {}, ones: {}", popcnt(v), v.count_ones());
                 return false;
             }
 
