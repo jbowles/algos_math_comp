@@ -88,7 +88,11 @@ function mykmeans(x, k; maxiters = 100, tol = 1e-5)
 end
 
 k = 3
-X = vcat([0.3*randn(2) for i = 1:100], [[1,1] + 0.3*randn(2) for i = 1:100], [[1,-1] + 0.3*randn(2) for i = 1:100])
+X = vcat(
+    [0.3*randn(2) for i = 1:100], 
+    [[1,1] + 0.3*randn(2) for i = 1:100], 
+    [[1,-1] + 0.3*randn(2) for i = 1:100],
+)
 
 
 ment, rep = mykmeans(X, k)
