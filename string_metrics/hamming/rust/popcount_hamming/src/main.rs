@@ -61,6 +61,10 @@ impl HammingWeight for &[u8] {
     Do Harley-Seal popcount
     See also [kimwalisch popcount](https://github.com/kimwalisch/primesieve/blob/5062c611402f391f531dd1d081c6969115f7d40c/src/popcount.cpp#L54)
 */
+
+/// lauradoux_for_weight uses a tree-merge approach... needs to be benchmarked
+/// See Lauradoux Cédric's [tree-merging
+/// approach](http://web.archive.org/web/20120411185540/http://perso.citi.insa-lyon.fr/claurado/hamming.html)
 fn lauradoux_for_weight(buffer: [[u64; 30]; 1], mut count: u64) -> u64 {
     let m1: u64 = 0x5555555555555555; //binary: 0101...
     let m2: u64 = 0x3333333333333333; //binary: 00110011..
@@ -118,12 +122,13 @@ fn distance_native(x: &[u8], y: &[u8]) -> Result<u64, DistanceError> {
     Ok(d)
 }
 
-/// Lauradoux population count
-/// Computes the bitwise [Hamming
-/// distance](https://en.wikipedia.org/wiki/Hamming_distance) between
-/// `x` and `y`, number of bits where `x` and `y` differ,
+/// lauradoux_for_distance uses a tree-merge approach to compute 
+/// bitwise [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance)
+/// between `x` and `y`, number of bits where `x` and `y` differ,
 /// or, number of set bits xor `x` and `y`.
-///
+/// Needs to be benchmarked
+/// See Lauradoux Cédric's [tree-merging](http://web.archive.org/web/20120411185540/http://perso.citi.insa-lyon.fr/claurado/hamming.html)
+/// See [huonw hamming in rust](https://github.com/huonw/hamming/blob/master/src/distance_.rs#L65)
 /// Attempt here is to create an optimized version of the native implemention.
 fn lauradoux_for_distance(x: &[u8], y: &[u8]) -> Result<u64, DistanceError> {
     if x.len() != y.len() {
