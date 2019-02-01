@@ -10,13 +10,12 @@ called assignment, where assignment[i] is the number of the group that vector x[
 store the k cluster representatives as a Julia list called reps
 with reps[j] the jth cluster
 """
-
-function jclust_debug(x,reps,assignment)
+function jclust_debug(x, reps, assignment)
     for i in 1:length(x)
         println("i = ", i)
         println("x[i] = ", x[i])
         println("reps assg i = ", reps[assignment[i]])
-        k = x[i]-reps[assignment[i]]
+        k = x[i] - reps[assignment[i]]
         println("k = ", k)
         println("norm(k) = ", norm(k))
         println("norm(k)^2 = ", norm(k)^2)
@@ -24,14 +23,10 @@ function jclust_debug(x,reps,assignment)
     end
 end
 
-Jclust(x,reps,assignment) = avg([
-    norm(
-            x[i]-reps[assignment[i]]
-        )^2 for i=1:length(x)
-    ])
+Jclust(x, reps, assignment) = avg([norm(x[i] - reps[assignment[i]])^2 for i = 1:length(x)])
 x = [[0,1],[1,0],[-1,1]]
 reps = [[1,1],[0,0]]
 assignment = [1,2,1]
 
-jclust_debug(x,reps,assignment)
-println(Jclust(x,reps,assignment))
+jclust_debug(x, reps, assignment)
+println(Jclust(x, reps, assignment))

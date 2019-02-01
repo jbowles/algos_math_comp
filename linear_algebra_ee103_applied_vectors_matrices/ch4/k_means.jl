@@ -49,11 +49,12 @@ We terminate the algorithm when the improvement in the clustering objective beco
 -------
 """
 
+
 function mykmeans(x, k; maxiters = 100, tol = 1e-5)
     N = length(x)
     n = length(x[1])
     distances = zeros(N) #store distance of each point to nearest representative
-    reps = [zeros(n) for j=1:k] #store representatives: n-element Array{Array{Float64,1},1}
+    reps = [zeros(n) for j = 1:k] #store representatives: n-element Array{Array{Float64,1},1}
     #assignment is N-vector value of integer in 1:k
     #initial assignment is chosen randomly
     assignment = [rand(1:k) for i in 1:N] #N-element Array{Int64,1}
@@ -63,14 +64,14 @@ function mykmeans(x, k; maxiters = 100, tol = 1e-5)
         #cluster j representative is average of points in cluster j
         for j = 1:k
             #find indexes of points in cluster for j, collect values in 'group' array
-            group = [i for i=1:N if assignment[i] == j]
+            group = [i for i=1:N if assignment[i]     == j]
             #set reps[j] to the constructed array from subset of elements of x
             #indexed by 'group', summed and divided by 'group' length
             reps[j] = sum(x[group]) / length(group)
         end
         #each x[i] find distance to nearest representative and its group index
         for i = 1:N
-          (distances[i], assignment[i]) = findmin([norm(x[i] - reps[j]) for j=1:k])
+            (distances[i], assignment[i]) = findmin([norm(x[i] - reps[j]) for j = 1:k])
         end
 
         #compute clustering objective
@@ -88,10 +89,9 @@ function mykmeans(x, k; maxiters = 100, tol = 1e-5)
 end
 
 k = 3
-X = vcat(
-    [0.3*randn(2) for i = 1:100], 
-    [[1,1] + 0.3*randn(2) for i = 1:100], 
-    [[1,-1] + 0.3*randn(2) for i = 1:100],
+X = vcat([0.3 * randn(2) for i = 1:100], 
+    [[1,1] + 0.3 * randn(2) for i = 1:100], 
+    [[1,-1] + 0.3 * randn(2) for i = 1:100],
 )
 
 
