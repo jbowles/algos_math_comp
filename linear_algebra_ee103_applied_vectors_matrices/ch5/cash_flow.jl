@@ -1,5 +1,4 @@
 flow(rate) = ([1. 0 0], [1. -(1. + rate) 0], [0. 1 -(1. + rate)])
-
 # r == positive per-period interest rate
 r = 0.05
 e1, l1, l2 = flow(r)
@@ -12,16 +11,16 @@ CASH FLOW
 c = α1 * e1 + α2 * l1 + α3 * l2
 :
 
-From the third component we have 
+From the third component we have
     c3 = α3(−(1 + r)), so α3 = −c3/(1 + r)
 
 From the second component we have
     c2 =α2(−(1+r))+α3  =  α2(−(1+r))−c3/(1+r)
 
-so  
+so
     α2 = −c2/(1 + r) − c3/(1 + r)^2
 
-Finally from c1 = α1 + α2, we have 
+Finally from c1 = α1 + α2, we have
     α1 =c1 +c2/(1+r)+c3/(1+r)^2,
 which is the net present value (NPV) of the cash flow c.
 ==#
