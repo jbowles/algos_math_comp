@@ -19,8 +19,9 @@ fn version1() {
 }
 
 fn neural_network(input: f32, weight: f32) -> f32 {
-    let prediction = input * weight;
-    prediction
+    input * weight
+    // let prediction = input * weight;
+    // prediction
 }
 
 fn version2() {
@@ -34,8 +35,9 @@ fn version2() {
 }
 
 fn neural_network_n(input: Vec<f32>, weights: Vec<f32>) -> f32 {
-    let prediction = w_sum(input, weights);
-    prediction
+    w_sum(input, weights)
+    // let prediction = w_sum(input, weights);
+    // prediction
 }
 
 fn w_sum(a: Vec<f32>, b: Vec<f32>) -> f32 {
@@ -62,17 +64,19 @@ fn version3() {
     let weights = Vector3::new(0.1, 0.2, 0.0);
     let input = Vector3::new(toes[0], wlrec[0], nfans[0]);
     let pred = neural_network_dot(input, weights);
-    println!("version2: {}", pred)
+    println!("version3: {}", pred)
 }
 
 fn neural_network_dot(input: Vector3<f32>, weights: Vector3<f32>) -> f32 {
-    let pred = input.dot(&weights);
-    return pred;
+    // let pred = input.dot(&weights);
+    // return pred;
+    input.dot(&weights)
 }
 
 fn ele_mul(input: f32, weights: Vector3<f32>) -> Vector3<f32> {
-    let pred = input * weights;
-    pred
+    // let pred = input * weights;
+    // pred
+    input * weights
 }
 
 fn neural_network_ele_mul(input: f32, weights: Vector3<f32>) -> Vector3<f32> {
@@ -80,15 +84,13 @@ fn neural_network_ele_mul(input: f32, weights: Vector3<f32>) -> Vector3<f32> {
 }
 
 fn version4() {
-    //let input: f32 = 0.64;
-    //let weights = Vector3::new(0.3, 0.2, 0.9);
-    let pred = neural_network_ele_mul(0.65, Vector3::new(0.3, 0.2, 0.9));
-    println!("{}", pred)
+    let input: f32 = 0.65;
+    let weights = Vector3::new(0.3, 0.2, 0.9);
+    let pred = neural_network_ele_mul(input, weights);
+    println!("version4: {}", pred)
 }
 
 fn version4_1() {
-    //let weights = vec![0.3, 0.2, 0.9];
-    //let pred = neural_network_ele_mul(0.64, Vector3::from_row_slice(&weights));
-    let pred = neural_network_ele_mul(0.65, Vector3::from_row_slice(&vec![0.3, 0.2, 0.9]));
-    println!("{}", pred)
+    let pred = neural_network_ele_mul(0.64, Vector3::from_row_slice(&[0.3, 0.2, 0.9]));
+    println!("version4_1: {}", pred)
 }

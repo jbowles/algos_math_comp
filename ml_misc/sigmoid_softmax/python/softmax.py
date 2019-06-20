@@ -85,5 +85,6 @@ def f(x):
 def softmax_theta(x, theta=1.0):
     """ naive version of softmax... no numerical stability"""
     t = np.exp(x * theta)
+
     t /= np.sum(t, axis=0)
     return t
