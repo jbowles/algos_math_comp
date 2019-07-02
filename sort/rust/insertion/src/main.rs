@@ -1,36 +1,43 @@
 fn main() {
-    let mut abar = vec![5, 2, 4, 6, 1, 3];
-    // let mut abar = vec![31, 41, 59, 26, 41, 58];
-    println!("TWOnosort: {:?}", abar);
-    let a = insertion_sort_two(&mut abar);
-    println!("TWOsorted: {:?}", a);
-
-    println!("---");
-
-
     let mut a = vec![5, 2, 4, 6, 1, 3];
-    println!("isort-sorted: {:?}", a);
+    println!("isort-nosort: {:?}", a);
     // let mut abar = vec![31, 41, 59, 26, 41, 58];
     isort(&mut a);
-    println!("isort-nosort: {:?}", a);
+    println!("isort-sorted: {:?}", a);
 
-    println!("---");
-
-    /*
-        // let mut abar = vec![5, 2, 4, 6, 1, 3];
-        let mut abar = vec![31, 41, 59, 26, 41, 58];
-        let a = insertion_sort_three(&mut abar);
-        println!("THREEsorted: {:?}", a);
-        println!("THREEnosort: {:?}", abar);
-    */
+    let mut aa = vec![5, 2, 4, 6, 1, 3];
+    // let order = "asc";
+    println!("isort_order-nosort: {:?}", aa);
+    // let mut abar = vec![31, 41, 59, 26, 41, 58];
+    isort_order(&mut aa, "desc");
+    println!("isort_oreder-sorted: {:?}", aa);
 }
+
+
+/*
+fn isort_apply<F>(a: &mut [isize], apply: F)
+where
+    F: Fn() -> std::cmp::PartialOrd,
+{
+    for j in 1..a.len() {
+        let key = a[j];
+        let mut i = (j - 1) as isize;
+        while (i >= 0) && (a[i as usize] apply() key) {
+            a[(i + 1) as usize] = a[i as usize];
+            i -= 1;
+        }
+        a[(i + 1) as usize] = key;
+    }
+}
+*/
+
 
 fn isort(a: &mut [isize]) {
     for j in 1..a.len() {
-        println!("j={}", j);
+        // println!("j={}", j);
         let key = a[j];
         let mut i = (j - 1) as isize;
-        println!("  i={}", i);
+        // println!("  i={}", i);
         while (i >= 0) && (a[i as usize] > key) {
             a[(i + 1) as usize] = a[i as usize];
             i -= 1;
@@ -39,6 +46,33 @@ fn isort(a: &mut [isize]) {
     }
 }
 
+//REVERSE: switch comparison operator in while loop: (a[i] < key) instead of (a[i] > key)
+fn isort_order(a: &mut [isize], order: &str) {
+    for j in 1..a.len() {
+        let key = a[j];
+        let mut i = (j - 1) as isize;
+
+        match order {
+            "desc" => {
+                while (i >= 0) && (a[i as usize] < key) {
+                    a[(i + 1) as usize] = a[i as usize];
+                    i -= 1;
+                }
+            }
+            _ => {
+                while (i >= 0) && (a[i as usize] > key) {
+                    a[(i + 1) as usize] = a[i as usize];
+                    i -= 1;
+                }
+            }
+        }
+
+        a[(i + 1) as usize] = key;
+    }
+}
+
+
+#[allow(dead_code)]
 fn insertion_sort_two(abar: &mut Vec<usize>) -> Vec<usize> {
     let mut a = abar.to_owned();
     for j in 1..a.len() {

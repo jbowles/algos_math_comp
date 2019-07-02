@@ -1,3 +1,8 @@
+fn main() {
+    let mut items: Vec<i32> = vec![4, 2, 4, 5, 2, 3, 1, 5, 6];
+    find_first_dup_item(&mut items);
+}
+
 fn find_first_dup_item(v: &mut Vec<i32>) {
     print!("repeated items: ");
     for i in 0..(v.len() - 1) as usize {
@@ -9,9 +14,4 @@ fn find_first_dup_item(v: &mut Vec<i32>) {
         }
     }
     println!();
-}
-
-fn main() {
-    let mut items: Vec<i32> = vec![4, 2, 4, 5, 2, 3, 1, 5, 6];
-    find_first_dup_item(&mut items);
 }
