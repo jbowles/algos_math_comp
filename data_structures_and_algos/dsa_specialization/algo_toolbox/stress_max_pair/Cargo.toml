@@ -1,0 +1,13 @@
+[package]
+name = "stress_max_pair"
+version = "0.1.0"
+authors = ["Joshua Bowles <jbowayles@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+rand = "0.7"
+criterion = "0.2"
+
+[[bench]]
+name = "example"
+harness = false
