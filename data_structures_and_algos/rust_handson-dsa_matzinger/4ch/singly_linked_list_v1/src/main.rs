@@ -68,8 +68,7 @@ impl TransactionLog {
 }
 /*
     NEED:
-        append at end
-        remove from front
+        replay...
 */
 impl TransactionLog {
     pub fn append(&mut self, value: String) {
