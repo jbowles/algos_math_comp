@@ -13,6 +13,17 @@ function polyGen(a...)
     return poly
 end
 
-polynom = polyGen(1, 3, -10)
-zeroVals = Roots.find_zeros(polynom, -10, 10)
+# polynom = polyGen(1, 3, -10)
+# zeroVals = Roots.find_zeros(polynom, -10, 10)
+
+
+zeroVals = Roots.find_zeros(polyGen(1, 3, -10), -10, 10)
 println("zeros of function f(x): ", zeroVals)
+
+
+# function sumc(a, n, x)
+#     return sum([a[i + 1] * x^i for i in 0:n])
+# end
+
+# a = [1 3 10]
+# sumc(a, length(a)-1, rand(10,10))
