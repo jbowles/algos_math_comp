@@ -1,24 +1,15 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
+	"strings"
 )
 
 func main() {
+	fmt.Println("reverseNaive: ", reverseNaive("hello"))
 
-	result := reverse("hello")
-	fmt.Println(result)
-	/*
-		result := naive("hello")
-		fmt.Println(result)
-
-		resultSB := naiveWithSB("hello")
-		fmt.Println(resultSB)
-	*/
-}
-
-func reverse(s string) string {
-	return s
+	fmt.Println("reverseNaiveWithSB: ", reverseNaiveWithSB("hello"))
 }
 
 /*
@@ -28,8 +19,7 @@ func reverse(s string) string {
 	casts code point to rune/string
 	writes to buffer
 */
-/*
-func naive(s string) string {
+func reverseNaive(s string) string {
 	var b bytes.Buffer
 	//reverse....
 	for i := len(s) - 1; i >= 0; i-- {
@@ -39,7 +29,7 @@ func naive(s string) string {
 
 	return b.String()
 }
-func naiveWithSB(s string) string {
+func reverseNaiveWithSB(s string) string {
 	var b strings.Builder
 	//reverse....
 	for i := len(s) - 1; i >= 0; i-- {
@@ -49,4 +39,3 @@ func naiveWithSB(s string) string {
 
 	return b.String()
 }
-*/
