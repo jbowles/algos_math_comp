@@ -8,8 +8,8 @@ import (
 
 func main() {
 	fmt.Println("reverseNaive: ", reverseNaive("hello"))
-
 	fmt.Println("reverseNaiveWithSB: ", reverseNaiveWithSB("hello"))
+	fmt.Println("reverseNaiveAppend: ", reverseNaiveAppend("hello"))
 }
 
 /*
@@ -29,6 +29,8 @@ func reverseNaive(s string) string {
 
 	return b.String()
 }
+
+//loop backwards and write to buffer
 func reverseNaiveWithSB(s string) string {
 	var b strings.Builder
 	//reverse....
@@ -38,4 +40,14 @@ func reverseNaiveWithSB(s string) string {
 	}
 
 	return b.String()
+}
+
+// this still has to go through all n elements
+func reverseNaiveAppend(s string) string {
+	var a []byte
+	l := len(s)
+	for i := range s {
+		a = append(a, s[l-(i+1)])
+	}
+	return string(a)
 }

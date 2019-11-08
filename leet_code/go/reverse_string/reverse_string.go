@@ -7,7 +7,6 @@ import (
 
 func main() {
 	s := "hello"
-	fmt.Println("reverseOn: ", reverseOn(s))
 	fmt.Println("reverse: ", reverse(s))
 }
 
@@ -23,14 +22,4 @@ func reverse(s string) string {
 		end--
 	}
 	return strings.Join(a, "")
-}
-
-// this still has to go through all n elements
-func reverseOn(s string) string {
-	var a []byte
-	l := len(s)
-	for i := range s {
-		a = append(a, s[l-(i+1)])
-	}
-	return string(a)
 }
