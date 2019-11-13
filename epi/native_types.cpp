@@ -43,8 +43,8 @@ void cmathops()
 
 int main()
 {
-    // bitwops();
-    // nulim();
+    bitwops();
+    nulim();
     cmathops();
     return 0;
 }
