@@ -21,6 +21,31 @@ func main() {
 	fmt.Println("reverseTwo(120)", reverseTwo(120))                 //21
 	fmt.Println("reverseTwo(1534236469)", reverseTwo(1534236469))   //should be 0
 	fmt.Println("reverseTwo(-2147483648)", reverseTwo(-2147483648)) //should be 0
+
+	fmt.Println("reverseThree(123)", reverseThree(123))                 //321
+	fmt.Println("reverseThree(-123)", reverseThree(-123))               //-321
+	fmt.Println("reverseThree(120)", reverseThree(120))                 //21
+	fmt.Println("reverseThree(1534236469)", reverseThree(1534236469))   //should be 0
+	fmt.Println("reverseThree(-2147483648)", reverseThree(-2147483648)) //should be 0
+}
+
+/*
+	-- Since we've divided input by 10 then multiplying the reversed number by 10 extends
+		the value back to the digit place of the original number
+	-- Adding the last digit of original number to multiplied reversed number gives it
+		the new tens place
+*/
+func reverseThree(x int) int {
+	var rev int
+	for x != 0 {
+		rev = (rev * 10) + (x % 10)
+		x /= 10
+	}
+
+	if (rev > math.MaxInt32) || (rev < math.MinInt32) {
+		return 0
+	}
+	return rev
 }
 
 // Time:  O(log(x)) ... roughly log_10(x) digits in x
@@ -38,6 +63,7 @@ func reverse(x int) int {
 	}
 	return rev
 }
+
 
 func reverseTwo(x int) int {
 	var rev int
