@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	in := []int{121, 11, 636, 99, 1, 666, 123321, -121, -1, -10, 10, -99, 82937483}
+	in := []int{2112, 121, 11, 636, 99, 1, 666, 123321, -121, -1, -10, 10, -99, 82937483}
 	for _, i := range in {
 		fmt.Printf("%d is %v\n", i, isPalindrome(i))
 	}
@@ -23,17 +23,19 @@ func main() {
 		the sequence processing
 */
 func isPalindrome(x int) bool {
-	// x < 0 is not a palindrome
+	// less than 0 is not a palindrome
 	if x < 0 {
 		return false
 	}
-	// Also if the last digit of the number is 0, in order to be a palindrome,
-	// the first digit of the number also needs to be 0.
-	// Only 0 satisfy this property.
+
+	// if last digit is zero then first digit must be zero.
+	// zero itself is not palindrome either
 	if (x%10 == 0) && (x != 0) {
 		return false
 	}
 
+	//similar to reversing a number excpet instead of `x != 0`
+	// we want `x > reversedNum` (i.e., halfway point of digit sequence)
 	var reversedNum int
 	for x > reversedNum {
 		reversedNum = (reversedNum * 10) + (x % 10)
