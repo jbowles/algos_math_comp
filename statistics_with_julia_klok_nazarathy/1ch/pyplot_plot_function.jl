@@ -6,6 +6,7 @@ g(x) = x - 2
 
 ax = subplot()
 ax.spines["left"].set_position("zero")
+
 ax.spines["bottom"].set_position("zero")
 ax.spines["right"].set_position("zero")
 ax.spines["top"].set_position("zero")
