@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 func main() {
@@ -13,6 +12,50 @@ func main() {
 	fmt.Println("5.FALSE", proper("((fd)"))
 	fmt.Println("6.FALSE", proper(")(fd"))
 }
+
+func proper(s string) bool {
+	c := 0
+	for _, v := range s {
+		if v == '(' {
+			c++
+		} else if v == ')' {
+			c--
+			if c < 0 {
+				return false
+			}
+		}
+	}
+	return c == 0
+}
+
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 func proper(s string) bool {
 	c := 0
@@ -29,7 +72,6 @@ func proper(s string) bool {
 	return c == 0
 }
 
-/*
 func proper(s string) bool {
 	c := 0
 	for _, val := range strings.Split(s, "") {

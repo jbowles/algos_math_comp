@@ -26,6 +26,20 @@ func countFlip(s string) int {
 
 /*
 func countFlip(s string) int {
+	c := 0
+	rs := []rune(s)
+	for i := 1; i < len(rs); i++ {
+		if rs[i] != rs[i-1] {
+			c++
+		}
+	}
+	if rs[len(rs)-1] == '-' {
+		c++
+	}
+	return c
+}
+
+func countFlip(s string) int {
 	var c int
 	rs := []rune(s)
 	for i := 1; i < len(rs); i++ {

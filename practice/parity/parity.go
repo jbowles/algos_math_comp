@@ -10,6 +10,16 @@ func main() {
 	showOps()
 }
 
+func parity(n int) int {
+	c := 0
+	for n > 0 {
+		c ^= 1
+		n &= (n - 1)
+	}
+	return c
+}
+
+/*
 // O(n)
 func parity(x int) int {
 	count := 0
@@ -19,6 +29,18 @@ func parity(x int) int {
 	}
 	return count
 }
+
+func parity_naive(x int) int {
+	result := 0
+	for x > 0 {
+		fmt.Printf("x = %v\n", x)
+		result ^= (x & 1)
+		// fmt.Printf("result = %v\n", result)
+		x >>= 1
+	}
+	return result
+}
+*/
 
 func showOps() {
 	var a uint = 60 /* 60 = 0011 1100 */

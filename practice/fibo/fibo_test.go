@@ -4,7 +4,7 @@ import "testing"
 
 func BenchmarkFibNaive(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		fibNaive(33)
+		fibR(33)
 	}
 }
 func BenchmarkFibL(b *testing.B) {

@@ -3,49 +3,44 @@ package main
 import "fmt"
 
 func main() {
-	//ans2 := []int{0, 1, 0, 1, 1, 2, 2}
-	//ans3 := []int{0, 0, 1, 2, 2, 1, 1}
-	tN := []int{0, 1, 2, 0, 2, 1, 1}
-	fmt.Println("partNaive3", partNaive(3, tN))
+
 	t := []int{0, 1, 2, 0, 2, 1, 1}
-	fmt.Println("part3     ", part(3, t))
+	part(len(t)/2, t)
+	fmt.Println(t)
 
-	fmt.Println("")
-	ttN := []int{0, 1, 2, 0, 2, 1, 1}
-	fmt.Println("partNaive5", partNaive(5, ttN))
-	tt := []int{0, 1, 2, 0, 2, 1, 1}
-	fmt.Println("part5     ", part(5, tt))
+	tt := []int{0, 2, 1, 1, 0, 2, 0, 1, 0, 2, 2, 0, 1, 2, 0, 2}
+	part(len(tt)/2, tt)
+	part(len(tt)/2, tt)
+	fmt.Println(tt)
 
-	ttt := []int{-3, 0, -1, 1, 1, 1, 8, 8, 8, 4, 2}
-	fmt.Println("part     ", part(1, ttt))
-	tt4 := []int{0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1}
-	fmt.Println("part     ", part(0, tt4))
-	tt5 := []int{0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1}
-	fmt.Println("part     ", partNaive(0, tt5))
+	ttt := []int{2, 0, 0, 2, 2, 1, 0}
+	part(len(ttt)/2, ttt)
+	part(len(ttt)/2, ttt)
+	part(len(ttt)/2, ttt)
+	fmt.Println(t)
 }
 
 // wrong... works for ind=2 but not ind=3
 func part(ind int, A []int) []int {
 	var pivot = A[ind]
-	var smaller, equal, larger = 0, 0, (len(A) - 1)
-	fmt.Println("pivot=", pivot)
+	var smaller, equal, larger = 0, 0, len(A)
+	fmt.Printf("pivot index=%d value=%d\n", ind, pivot)
 	for equal < larger {
 		if A[equal] < pivot {
 			A[smaller], A[equal] = A[equal], A[smaller]
-			// A[equal], A[smaller] = A[smaller], A[equal]
 			smaller++
 			equal++
 		} else if A[equal] == pivot {
 			equal++
 		} else {
-			A[equal], A[larger] = A[larger], A[equal]
-			// A[larger], A[equal] = A[equal], A[larger]
 			larger--
+			A[equal], A[larger] = A[larger], A[equal]
 		}
 	}
 	return A
 }
 
+/*
 func partNaive(ind int, A []int) []int {
 	var pivot = A[ind]
 	fmt.Println("pivot=", pivot)
@@ -67,6 +62,7 @@ func partNaive(ind int, A []int) []int {
 	}
 	return A
 }
+*/
 
 /*
 const (
