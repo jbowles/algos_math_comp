@@ -1,8 +1,6 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 /*
 go test -bench=
@@ -37,6 +35,7 @@ func romanToInt(s string) int {
 			total += m[s[i]]
 			break
 		}
+		// fmt.Printf("%d:%s, %d:%s\n", i, string(s[i]), i+1, string(s[i+1]))
 		if m[s[i]] >= m[s[i+1]] {
 			total += m[s[i]]
 		} else {

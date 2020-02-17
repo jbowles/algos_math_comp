@@ -15,9 +15,9 @@ func abs(x int) int {
 // size of array cannot be smaller or equal to largest integer in array
 func findRepeating(arr []int) {
 	//need to find largest value, comapre to len(arr) and bail if not good.
-	fmt.Println("arrary == ", arr)
-	fmt.Println("len(array) == ", len(arr))
-	fmt.Printf("repeated items: ")
+	// fmt.Println("arrary == ", arr)
+	// fmt.Println("len(array) == ", len(arr))
+	// fmt.Printf("repeated items: ")
 	for i := 0; i < (len(arr) - 1); i++ {
 		/*
 			fmt.Println("i: ", i)
