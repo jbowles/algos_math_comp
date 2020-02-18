@@ -2,6 +2,13 @@ package main
 
 import "fmt"
 
+func main() {
+	//items := []int{3, 2, 3} // panic: runtime error: index out of range
+	items := []int{4, 2, 4, 5, 2, 3, 1, 5, 3}
+	res := findRepeat(items)
+	fmt.Printf("%v\n", res)
+}
+
 func abs(x int) int {
 	if x < 0 {
 		return -x
@@ -9,9 +16,24 @@ func abs(x int) int {
 	return x
 }
 
+func findRepeat(ns []int) []int {
+	out := []int{}
+	for i := 0; i < len(ns)-1; i++ {
+		if ns[abs(ns[i])] >= 0 {
+			//value of element as index
+			fmt.Printf("i=%d, nsi=%d, -nsi=-%d\n", i, ns[abs(ns[i])], -ns[abs(ns[i])])
+			ns[abs(ns[i])] = -ns[abs(ns[i])]
+		} else {
+			fmt.Printf("i=%d\n", i)
+			out = append(out, abs(ns[i]))
+		}
+	}
+	return out
+}
+
+/*
 //Find duplicates in O(n) time and O(1) extra space | Set 1
 // go vervsion of this c implementation found here: https://www.geeksforgeeks.org/find-duplicates-in-on-time-and-constant-extra-space/
-
 // size of array cannot be smaller or equal to largest integer in array
 func findRepeating(arr []int) {
 	//need to find largest value, comapre to len(arr) and bail if not good.
@@ -19,12 +41,10 @@ func findRepeating(arr []int) {
 	// fmt.Println("len(array) == ", len(arr))
 	// fmt.Printf("repeated items: ")
 	for i := 0; i < (len(arr) - 1); i++ {
-		/*
-			fmt.Println("i: ", i)
-			fmt.Println("arr[i]: ", arr[i])
-			fmt.Println("arr[arr[i]]: ", arr[arr[i]])
-			fmt.Println("-arr[abs(arr[i])]: ", -arr[abs(arr[i])])
-		*/
+		//fmt.Println("i: ", i)
+		//fmt.Println("arr[i]: ", arr[i])
+		//fmt.Println("arr[arr[i]]: ", arr[arr[i]])
+		//fmt.Println("-arr[abs(arr[i])]: ", -arr[abs(arr[i])])
 		if arr[abs(arr[i])] >= 0 {
 			arr[abs(arr[i])] = -arr[abs(arr[i])]
 		} else {
@@ -34,9 +54,4 @@ func findRepeating(arr []int) {
 	}
 	fmt.Println()
 }
-
-func main() {
-	//items := []int{3, 2, 3} // panic: runtime error: index out of range
-	items := []int{4, 2, 4, 5, 2, 3, 1, 5, 3}
-	findRepeating(items)
-}
+*/

@@ -15,29 +15,6 @@ func reverse(s string) string {
 }
 
 /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 func reverse(s string) string {
 	rs := []rune(s)
 	for l, r := 0, len(rs)-1; l < r; l, r = l+1, r-1 {
