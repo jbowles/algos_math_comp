@@ -11,22 +11,18 @@ func main() {
 func fizzbuzz(n int) <-chan string {
 	out := make(chan string, n)
 	go func() {
-		for i := 1; i <= n; i++ {
-			if i%15 == 0 {
-				out <- "FizzBuzz"
-			}
+		for i := 0; i <= n; i++ {
+			r := ""
 			if i%3 == 0 {
-				out <- "Fizz"
+				r += "Fizz"
 			}
 			if i%5 == 0 {
-				out <- "Buzz"
+				r += "Buzz"
 			}
-			out <- fmt.Sprintf("%d", i)
-			// var r string
-			// if i%3 == 0 {r+= "Fizz"}
-			// if i%5 == 0 {r+= "Buzz"}
-			// if r == "" {r = fmt.Sprintf("%d", i)}
-			// out <- r
+			if r == "" {
+				r = fmt.Sprintf("%d", i)
+			}
+			out <- r
 		}
 		close(out)
 	}()

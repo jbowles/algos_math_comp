@@ -7,6 +7,10 @@ func main() {
 	items := []int{4, 2, 4, 5, 2, 3, 1, 5, 3}
 	res := findRepeat(items)
 	fmt.Printf("%v\n", res)
+
+	items2 := []int{1, 2, 3, 1, 3, 6, 6}
+	res2 := findRepeat(items2)
+	fmt.Printf("%v\n", res2)
 }
 
 func abs(x int) int {
@@ -18,18 +22,29 @@ func abs(x int) int {
 
 func findRepeat(ns []int) []int {
 	out := []int{}
-	for i := 0; i < len(ns)-1; i++ {
+	for i := 0; i < len(ns); i++ {
 		if ns[abs(ns[i])] >= 0 {
-			//value of element as index
-			fmt.Printf("i=%d, nsi=%d, -nsi=-%d\n", i, ns[abs(ns[i])], -ns[abs(ns[i])])
 			ns[abs(ns[i])] = -ns[abs(ns[i])]
 		} else {
-			fmt.Printf("i=%d\n", i)
 			out = append(out, abs(ns[i]))
 		}
 	}
 	return out
 }
+
+/*
+func findRepeat(ns []int) []int {
+	out := []int{}
+	for i := 0; i < len(ns); i++ {
+		if ns[abs(ns[i])] >= 0 {
+			ns[abs(ns[i])] = -ns[abs(ns[i])]
+		} else {
+			out = append(out, abs(ns[i]))
+		}
+	}
+	return out
+}
+*/
 
 /*
 //Find duplicates in O(n) time and O(1) extra space | Set 1

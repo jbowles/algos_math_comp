@@ -27,6 +27,22 @@ func isPalindrome(n int) bool {
 }
 
 /*
+func isPalindrome(n int) bool {
+	if n <= 0 {
+		return false
+	}
+	if n%10 == 0 {
+		return false
+	}
+	var r int
+	for n > r {
+		r = (r * 10) + (n % 10)
+		n /= 10
+	}
+	return (n == r) || (n == r/10)
+}
+
+
 func isPalindrome(x int) bool {
 	// less than 0 is not a palindrome
 	if x <= 0 {

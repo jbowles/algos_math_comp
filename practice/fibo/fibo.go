@@ -4,25 +4,20 @@ import "fmt"
 
 func main() {
 	testFibR()
+	testFibM()
 	testFibL()
 	testFibD()
 }
 
-// r := makeRange(0, (100%60)+2)
-func makeRange(min, max int) []int {
-	a := make([]int, max-min+1)
-	for i := range a {
-		a[i] = min + i
-	}
-	return a
-}
-
+//slowest
 func fibR(n int) int {
 	if n <= 1 {
 		return n
 	}
 	return fibR(n-1) + fibR(n-2)
 }
+
+//second fastest
 func fibL(n int) int {
 	if n <= 1 {
 		return 1
@@ -39,6 +34,19 @@ func fibL(n int) int {
 	return f[n]
 }
 
+//fastest
+func fibM(n int) int {
+	if n <= 1 {
+		return 1
+	}
+	var fMinus0, fMinus1 = 0, 1
+	for i := 2; i <= n; i++ {
+		f := fMinus0 + fMinus1
+		fMinus0, fMinus1 = fMinus1, f
+	}
+	return fMinus1
+}
+
 func fibD(n int) int {
 	f0, f1 := 0, 1
 	for range makeRange(1, ((n % 60) + 2)) {
@@ -48,43 +56,14 @@ func fibD(n int) int {
 }
 
 /*
-// recursive
-func fibNaive(size int) int {
-	if size <= 1 {
-		return size
-	}
-	return fibNaive(size-1) + fibNaive(size-2)
-}
 
-func fibL(n int) int {
-	f := make([]int, n+1, n+2)
-	fmt.Println(f)
-	if n < 2 {
-		f = f[0:2]
-	}
-	f[0] = 0
-	f[1] = 1
-	for i := 2; i <= n; i++ {
-		f[i] = f[i-1] + f[i-2]
-	}
-	return f[n]
-}
+
 func fibD(n int) int {
 	f0, f1 := 0, 1
-	for range makeRange(1, ((n + 2) % 60)) {
+	for range makeRange(1, ((n % 60) + 2)) {
 		f0, f1 = f1, f0%10+f1%10
-		//f0 = std::mem::replace(&mut f1, f2)
 	}
 	return (f0 - 1) % 10
-}
-
-// r := makeRange(0, (100%60)+2)
-func makeRange(min, max int) []int {
-	a := make([]int, max-min+1)
-	for i := range a {
-		a[i] = min + i
-	}
-	return a
 }
 
 // NOTES ON fibD
@@ -106,13 +85,30 @@ def last_digit(n):
 print([last_digit(n) for n in range(1, 11)])
 */
 
+// r := makeRange(0, (100%60)+2)
+func makeRange(min, max int) []int {
+	a := make([]int, max-min+1)
+	for i := range a {
+		a[i] = min + i
+	}
+	return a
+}
 func testFibR() {
 	fmt.Println("Testing fibR")
 	//calculate actual fibonacci value
 	tester := [][]int{{0, 1}, {1, 1}, {33, 3524578}} // 83: 147844013817084101}
 	for _, t := range tester {
 		resNaive := fibR(t[0])
-		fmt.Printf("fibNaive. size: %d, answer: %d, result: %d, CORRECT?[%t]\n", t[0], t[1], resNaive, resNaive == t[1])
+		fmt.Printf("fibR. size: %d, answer: %d, result: %d, CORRECT?[%t]\n", t[0], t[1], resNaive, resNaive == t[1])
+	}
+}
+func testFibM() {
+	fmt.Println("Testing fibM")
+	//calculate actual fibonacci value
+	tester := [][]int{{0, 1}, {1, 1}, {33, 3524578}} // 83: 147844013817084101}
+	for _, t := range tester {
+		resNaive := fibM(t[0])
+		fmt.Printf("fibM. size: %d, answer: %d, result: %d, CORRECT?[%t]\n", t[0], t[1], resNaive, resNaive == t[1])
 	}
 }
 

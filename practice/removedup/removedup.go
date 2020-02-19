@@ -3,13 +3,6 @@ package main
 import "fmt"
 
 func main() {
-	/*
-		t := []int{1, 4, 2, 6, 3, 5, 3, 2, 5} //9, valid=6
-		result := dedup(t)
-		good := []int{1, 4, 2, 6, 3, 5} //6
-		fmt.Printf("CORRECT?[%t]\n", len(result) == len(good))
-		fmt.Printf("%v ==\n%v\n", result, good)
-	*/
 	t := []int{1, 4, 2, 6, 3, 5, 3, 2, 5} //9, valid=6
 	good := []int{1, 4, 2, 6, 3, 5}       //6
 	resu := dedup(t)
@@ -17,15 +10,16 @@ func main() {
 	fmt.Printf("resu:%v ==\ngood:%v\n", resu, good)
 }
 
-func dedup(a []int) []int {
+func dedup(ns []int) []int {
 	out := []int{}
-	var m = make(map[int]bool)
-	for _, v := range a {
-		if m[v] {
+	seen := make(map[int]bool)
+	for _, v := range ns {
+		if seen[v] {
 			continue
+		} else {
+			out = append(out, v)
+			seen[v] = true
 		}
-		m[v] = true
-		out = append(out, v)
 	}
 	return out
 }

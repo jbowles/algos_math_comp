@@ -13,7 +13,7 @@ func main() {
 func countFlip(s string) int {
 	c := 0
 	rs := []rune(s)
-	for i := 1; i < len(rs); i++ {
+	for i := 1; i < len(s); i++ {
 		if rs[i] != rs[i-1] {
 			c++
 		}

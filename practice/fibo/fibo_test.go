@@ -12,3 +12,8 @@ func BenchmarkFibL(b *testing.B) {
 		fibL(33)
 	}
 }
+func BenchmarkFibM(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		fibM(33)
+	}
+}

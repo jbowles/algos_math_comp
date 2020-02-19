@@ -20,8 +20,7 @@ func max(i, j int) int {
 }
 
 func canReachEnd(ns []int) bool {
-	var f int
-	last := len(ns) - 2
+	f, last := 0, len(ns)-2
 	for i := 0; i <= f && f < last; i++ {
 		f = max(f, ns[i]+i)
 	}
@@ -30,11 +29,11 @@ func canReachEnd(ns []int) bool {
 
 /*
 //O(n) time, O(1) space
-func canReachEnd(steps []int) bool {
-	f := 0
-	last := len(steps) - 2
+func canReachEnd(ns []int) bool {
+	var f int
+	last := len(ns) - 2
 	for i := 0; i <= f && f < last; i++ {
-		f = max(f, steps[i]+i)
+		f = max(f, ns[i]+i)
 	}
 	return f >= last
 }

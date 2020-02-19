@@ -8,8 +8,8 @@ func main() {
 }
 
 func reverse(n int) int {
-	var rev int
-	for n != 0 {
+	rev := 0
+	for n > 0 {
 		rev = (rev * 10) + (n % 10)
 		n /= 10
 	}
@@ -17,28 +17,14 @@ func reverse(n int) int {
 }
 
 /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+func reverse(n int) int {
+	var rev int
+	for n != 0 {
+		rev = (rev * 10) + (n % 10)
+		n /= 10
+	}
+	return rev
+}
 
 func reverse(x int) int {
 	var rev int
