@@ -14,18 +14,18 @@ func main() {
 }
 
 func searchFirstOfK(a []int, k int) int {
-	var left, right, result = 0, len(a) - 1, -1
+	left, right, result := 0, len(a)-1, -1
 	for left <= right {
-		if mid := left + (right-left)/2; a[mid] < k {
-			left = mid + 1
+		mid := left + (right-left)/2
+		if a[mid] > k {
+			right = mid - 1
 		} else if a[mid] == k {
 			result = mid
 			right = mid - 1
-		} else { //a[mid]>t
-			right = mid - 1
+		} else { //a[mid]<k
+			left = mid + 1
 		}
 	}
-
 	return result
 }
 

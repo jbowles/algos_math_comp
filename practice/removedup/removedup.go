@@ -12,13 +12,13 @@ func main() {
 
 func dedup(ns []int) []int {
 	out := []int{}
-	seen := make(map[int]bool)
+	m := make(map[int]bool)
 	for _, v := range ns {
-		if seen[v] {
+		if m[v] {
 			continue
 		} else {
+			m[v] = true
 			out = append(out, v)
-			seen[v] = true
 		}
 	}
 	return out

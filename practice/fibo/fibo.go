@@ -3,10 +3,10 @@ package main
 import "fmt"
 
 func main() {
-	testFibR()
+	// testFibR()
 	testFibM()
-	testFibL()
-	testFibD()
+	// testFibL()
+	// testFibD()
 }
 
 //slowest
@@ -39,12 +39,12 @@ func fibM(n int) int {
 	if n <= 1 {
 		return 1
 	}
-	var fMinus0, fMinus1 = 0, 1
+	var f0, f1 = 0, 1
 	for i := 2; i <= n; i++ {
-		f := fMinus0 + fMinus1
-		fMinus0, fMinus1 = fMinus1, f
+		f := f0 + f1
+		f0, f1 = f1, f
 	}
-	return fMinus1
+	return f1
 }
 
 func fibD(n int) int {
@@ -56,7 +56,17 @@ func fibD(n int) int {
 }
 
 /*
-
+func fibM(n int) int {
+	if n <= 1 {
+		return 1
+	}
+	var fMinus0, fMinus1 = 0, 1
+	for i := 2; i <= n; i++ {
+		f := fMinus0 + fMinus1
+		fMinus0, fMinus1 = fMinus1, f
+	}
+	return fMinus1
+}
 
 func fibD(n int) int {
 	f0, f1 := 0, 1

@@ -9,11 +9,11 @@ func main() {
 	// showOps()
 }
 
-func parity(x int) int {
+func parity(n int) int {
 	c := 0
-	for x > 0 {
+	for n > 0 {
 		c ^= 1
-		x &= (x - 1)
+		n &= (n - 1)
 	}
 	return c
 }

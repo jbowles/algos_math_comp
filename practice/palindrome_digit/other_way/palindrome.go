@@ -23,7 +23,7 @@ func isPalindrome(n int) bool {
 		r = (r * 10) + (n % 10)
 		n /= 10
 	}
-	return (n == r) || (n == r/10)
+	return n == r || n == r/10
 }
 
 /*

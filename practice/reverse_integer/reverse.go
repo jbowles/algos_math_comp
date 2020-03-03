@@ -8,12 +8,12 @@ func main() {
 }
 
 func reverse(n int) int {
-	rev := 0
+	var out int
 	for n > 0 {
-		rev = (rev * 10) + (n % 10)
+		out = (out * 10) + (n % 10)
 		n /= 10
 	}
-	return rev
+	return out
 }
 
 /*

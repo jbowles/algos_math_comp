@@ -20,7 +20,8 @@ func max(i, j int) int {
 }
 
 func canReachEnd(ns []int) bool {
-	f, last := 0, len(ns)-2
+	var f int
+	last := len(ns) - 2
 	for i := 0; i <= f && f < last; i++ {
 		f = max(f, ns[i]+i)
 	}

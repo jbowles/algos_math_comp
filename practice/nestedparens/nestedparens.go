@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 func main() {
@@ -16,13 +15,14 @@ func main() {
 
 func isNested(s string) bool {
 	c := 0
-	for _, val := range strings.Split(s, "") {
-		if val == ")" {
-			if c--; c < 0 {
+	for _, val := range s {
+		if val == '(' {
+			c++
+		} else if val == ')' {
+			c--
+			if c < 0 {
 				return false
 			}
-		} else if val == "(" {
-			c++
 		}
 	}
 	return c == 0
