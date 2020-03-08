@@ -7,7 +7,7 @@ use std::collections::HashMap;
 // https://rust-lang.github.io/rust-clippy/master/index.html#implicit_hasher
 pub fn find_mode<S: BuildHasher>(hist: HashMap<u32, u32, S>) -> u32 {
     let (mut res, mut tmp) = (0, 0);
-    println!("{:?}", hist);
+    // println!("{:?}", hist);
     for (k, v) in hist.iter() {
         if v > &tmp {
             res = *k;
