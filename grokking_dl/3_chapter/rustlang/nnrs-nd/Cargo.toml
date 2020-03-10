@@ -1,7 +1,0 @@
-[package]
-name = "nnrs-nd"
-version = "0.1.0"
-authors = ["Joshua Bowles <jbowayles@gmail.com>"]
-edition = "2018"
-
-[dependencies]
